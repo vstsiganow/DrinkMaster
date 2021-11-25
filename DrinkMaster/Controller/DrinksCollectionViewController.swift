@@ -35,7 +35,7 @@ class DrinksCollectionViewController: UICollectionViewController {
             return
         }
         
-        drinkDetailsVC.loadData(drinkId: drink.id)
+        drinkDetailsVC.shortDrink = drink
     }
     
     // MARK: UICollectionViewDataSource
@@ -53,7 +53,6 @@ class DrinksCollectionViewController: UICollectionViewController {
         let drink = drinks[indexPath.row]
         
         cell.configuration(drink: drink)
-        
         return cell
     }
     
@@ -67,7 +66,7 @@ class DrinksCollectionViewController: UICollectionViewController {
     // MARK: - Methods
     
     func setup(category: Category) {
-        reloadData(categoryCode: category.code)
+        reloadData(categoryCode: category.URLCode)
         self.title = category.title
     }
     
@@ -93,11 +92,9 @@ extension DrinksCollectionViewController: UICollectionViewDelegateFlowLayout {
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = collectionView.bounds.width - paddingSpace
         let widthPerItem = availableWidth / itemsPerRow
-        let heightPerItem = widthPerItem + 20
+        let heightPerItem = widthPerItem * 1.15
         
-        print(collectionView.frame, paddingSpace, availableWidth, widthPerItem, heightPerItem)
         return CGSize(width: widthPerItem, height: heightPerItem)
-        //return CGSize(width: 170, height: 200)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -105,7 +102,7 @@ extension DrinksCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.bottom
+        return sectionInsets.left
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -113,12 +110,12 @@ extension DrinksCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension DrinksCollectionViewController: UICollectionViewDataSourcePrefetching {
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        for indexPath in indexPaths {
-            let drink = drinks[indexPath.row]
-            
-        }
-    }
-
-}
+//extension DrinksCollectionViewController: UICollectionViewDataSourcePrefetching {
+//    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+//        for indexPath in indexPaths {
+//            let drink = drinks[indexPath.row]
+//
+//        }
+//    }
+//
+//}

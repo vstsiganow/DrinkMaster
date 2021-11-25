@@ -122,10 +122,9 @@ extension CategoryCollectionViewController: UICollectionViewDelegateFlowLayout {
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = collectionView.bounds.width - paddingSpace
         let widthPerItem = availableWidth / itemsPerRow
-        let heightPerItem = widthPerItem + 20
-        print(paddingSpace, availableWidth, widthPerItem, heightPerItem)
-        //return CGSize(width: widthPerItem, height: heightPerItem)
-        return CGSize(width: 170, height: 200)
+        let heightPerItem = widthPerItem * 1.15
+        
+        return CGSize(width: widthPerItem, height: heightPerItem)
     }
 
     

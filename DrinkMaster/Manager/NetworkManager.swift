@@ -16,7 +16,7 @@ protocol NetworkClient {
     /* completion определяет ассинхронность функции */
     func getCategories(completion: @escaping (Result<[Category], Error>) -> Void)
     func getShortDrinks(categoryCode: String, completion: @escaping (Result<[ShortDrink], Error>) -> Void)
-    func getDrink(drinkId: String, completion: @escaping (Result<Drink, Error>) -> Void)
+    func getDrink(drinkId: String, completion: @escaping (Result<[Drink], Error>) -> Void)
 }
 
 class NetworkManager: NetworkClient {
@@ -44,7 +44,7 @@ class NetworkManager: NetworkClient {
             do {
                 let decoder = JSONDecoder() // определяем тип декодера данных
                 let response = try decoder.decode(CategoriesResponse.self, from: data) // пытаемся декодировать полученные данные
-                
+
                 completion(.success(response.drinks)) // завершаем запрос с успехом
             } catch(let error) {
                 completion(.failure(error))  // завершаем запрос с ошибкой
@@ -74,7 +74,7 @@ class NetworkManager: NetworkClient {
             do {
                 let decoder = JSONDecoder() // определяем тип декодера данных
                 let response = try decoder.decode(ShortDrinkResponse.self, from: data) // пытаемся декодировать полученные данные
-                
+
                 completion(.success(response.drinks)) // завершаем запрос с успехом
             } catch(let error) {
                 completion(.failure(error))  // завершаем запрос с ошибкой
@@ -83,7 +83,7 @@ class NetworkManager: NetworkClient {
         dataTask.resume()
     }
     
-    func getDrink(drinkId: String, completion: @escaping (Result<Drink, Error>) -> Void) {
+    func getDrink(drinkId: String, completion: @escaping (Result<[Drink], Error>) -> Void) {
         let session = URLSession.shared
         
         let strURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkId
@@ -105,7 +105,7 @@ class NetworkManager: NetworkClient {
             do {
                 let decoder = JSONDecoder() // определяем тип декодера данных
                 let response = try decoder.decode(DrinkResponse.self, from: data) // пытаемся декодировать полученные данные
-                
+
                 completion(.success(response.drinks)) // завершаем запрос с успехом
             } catch(let error) {
                 completion(.failure(error))  // завершаем запрос с ошибкой

@@ -8,26 +8,28 @@
 import UIKit
 
 class CategoryCell: UICollectionViewCell {
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
     static let categoryCellIdentifier = "CategoryCell"
     
     func configuration(category item: Category) {
-        let imageWidth = self.contentView.layer.bounds.size.width - 20
-        let imageSize = CGSize(width: imageWidth, height: imageWidth)
-        
         titleLabel.text = item.title
         
-        if let image = UIImage(named: item.code) {
-            imageView.image = image.thumbnailOfSize(imageWidth)
+        if let image = UIImage(named: item.imageCode) {
+            imageView.image = image
         } else {
-            imageView.image = UIImage(named: "empty")?.thumbnailOfSize(imageWidth)
+            imageView.image = UIImage(named: "Empty")
         }
         
-        //imageView.image = imageView.image?.thumbnailOfSize(imageWidth)
-
-        self.imageView.layer.cornerRadius = 15
-        self.imageView.layer.masksToBounds = true
+        imageView.setImageCornerRadiusAndShadows(
+            conteiner: containerView,
+            cornerRadius: 20,
+            offset: CGSize(width: 1, height: 1),
+            color: UIColor.gray.cgColor,
+            opacity: 0.8,
+            shadowRadius: 4
+        )
     }
 }

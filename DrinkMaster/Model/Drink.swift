@@ -6,7 +6,7 @@
 //
 
 struct DrinkResponse: Decodable {
-    let drinks: Drink
+    let drinks: [Drink]
 }
 
 struct Drink: Decodable {
@@ -14,7 +14,7 @@ struct Drink: Decodable {
     var name: String
     var imageURL: String
     
-    var category: Category?
+    //var category: Category?
     var alcoholic: String?
     var glass: String?
     var instructions: String?
@@ -58,7 +58,7 @@ struct Drink: Decodable {
         case name = "strDrink"
         case imageURL = "strDrinkThumb"
         
-        case category = "strCategory"
+        //case category = "strCategory"
         case alcoholic = "strAlcoholic"
         case glass = "strGlass"
         case instructions = "strInstructions"
@@ -94,6 +94,5 @@ struct Drink: Decodable {
         case measure13 = "strMeasure13"
         case measure14 = "strMeasure14"
         case measure15 = "strMeasure15"
-        
     }
 }

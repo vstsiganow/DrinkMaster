@@ -14,15 +14,19 @@ struct CategoriesResponse: Decodable {
 struct Category: Decodable {
     var name: String
     
-    var code: String {
-        return name.toCategoryCode()
+    var URLCode: String {
+        toCategoryURLCode()
+    }
+    
+    var imageCode: String {
+        toCategoryImageCode()
     }
     
     var title: String {
-        toCategoryTitle(name: name)
+        toCategoryTitle()
     }
     
-    func toCategoryTitle(name: String) -> String {
+    func toCategoryTitle() -> String {
         guard name.contains("/") else { return name }
         
         var title = ""
@@ -43,8 +47,44 @@ struct Category: Decodable {
         }
         
         title += "\(words[words.count - 2]) and \(words[words.count - 1])"
-        print("title: \(title)")
+        
         return title
+    }
+    
+    func toCategoryURLCode() -> String {
+        let splited = name.split(separator: "/")
+        var total: [String] = []
+        
+        for group in splited {
+            let newWords = group.split(separator: " ")
+            
+            if newWords.count > 1 {
+                let joinedWords = newWords.joined(separator: "%20")
+                total.append(joinedWords)
+            } else {
+                let word = "\(String(newWords[0]))"
+                total.append(word)
+            }
+        }
+        return total.joined(separator: "%20/%20")
+    }
+    
+    func toCategoryImageCode() -> String {
+        let splited = name.split(separator: "/")
+        var total: [String] = []
+        
+        for group in splited {
+            let newWords = group.split(separator: " ")
+            
+            if newWords.count > 1 {
+                let joinedWords = newWords.joined(separator: "_")
+                total.append(joinedWords)
+            } else {
+                let word = "\(String(newWords[0]))"
+                total.append(word)
+            }
+        }
+        return total.joined(separator: "_")
     }
     
     /* Маппинг данных на источник */

@@ -8,49 +8,6 @@
 import UIKit
 
 extension UIImage {
-    func resizeImage(targetSize: CGSize) -> UIImage {
-        let size = self.size
-        
-        let widthRatio  = targetSize.width  / size.width
-        let heightRatio = targetSize.height / size.height
-        
-        let newSize = widthRatio > heightRatio ?  CGSize(width: size.width * heightRatio, height: size.height * heightRatio) : CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-        
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        self.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage ?? self
-    }
-}
-
-extension UIImageView {
-    func imageShadow(
-        containerView : UIView,
-        cornerRadious : CGFloat,
-        shadowColor: CGColor,
-        shadowOpacity: Float,
-        shadowOffset: CGSize,
-        shadowRadius: CGFloat
-    ){
-        containerView.clipsToBounds = false
-        containerView.layer.shadowColor = shadowColor
-        containerView.layer.shadowOpacity = shadowOpacity
-        containerView.layer.shadowOffset = shadowOffset
-        containerView.layer.shadowRadius = shadowRadius
-        containerView.layer.cornerRadius = cornerRadious
-        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: cornerRadious).cgPath
-        
-        self.clipsToBounds = true
-        self.layer.cornerRadius = cornerRadious
-        self.layer.rasterizationScale = UIScreen.main.scale
-        self.layer.shouldRasterize = true
-    }
-}
-
-extension UIImage {
     func scalePreservingAspectRatio(targetSize: CGSize) -> UIImage {
         // Determine the scale factor that preserves aspect ratio
         let widthRatio = targetSize.width / size.width
@@ -78,20 +35,33 @@ extension UIImage {
         
         return scaledImage
     }
-    
-    func scaleForSize(size: CGSize) -> UIImage {
-        self.resizeImage(targetSize: size)
-    }
 }
 
 extension UIImage {
-  func thumbnailOfSize(_ size: CGFloat) -> UIImage {
-    UIGraphicsBeginImageContext(CGSize(width: size, height: size))
-    let rect = CGRect(x: 0.0, y: 0.0, width: size, height: size)
+  func thumbnailOfSize(_ size: CGSize) -> UIImage {
+    UIGraphicsBeginImageContext(CGSize(width: size.width, height: size.height))
+    let rect = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height)
     UIGraphicsBeginImageContext(rect.size)
     draw(in: rect)
     let thumbnail = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext()
     return thumbnail!
   }
+}
+
+extension UIImageView {
+    func setImageCornerRadiusAndShadows(conteiner: UIView, cornerRadius: CGFloat, offset: CGSize, color: CGColor, opacity: Float, shadowRadius: CGFloat) {
+        self.layer.masksToBounds = true
+        self.clipsToBounds = true
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.layer.cornerRadius = cornerRadius
+        
+        conteiner.layer.cornerRadius = cornerRadius
+        conteiner.layer.shadowOffset = offset
+        conteiner.layer.shadowColor = color
+        conteiner.layer.shadowRadius = shadowRadius
+        conteiner.layer.shadowOpacity = opacity
+        conteiner.layer.shouldRasterize = true
+        conteiner.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: cornerRadius).cgPath
+    }
 }
