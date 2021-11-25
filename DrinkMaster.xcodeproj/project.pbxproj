@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		845051DE273D91D20088C4C8 /* BlurEffectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845051DD273D91D20088C4C8 /* BlurEffectManager.swift */; };
 		846BD74A274917610025EABA /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846BD749274917600025EABA /* UIView+Extension.swift */; };
 		847D2E7F270F94670083C897 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D2E7E270F94670083C897 /* AppDelegate.swift */; };
 		847D2E81270F94670083C897 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847D2E80270F94670083C897 /* SceneDelegate.swift */; };
@@ -30,7 +29,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		845051DD273D91D20088C4C8 /* BlurEffectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectManager.swift; sourceTree = "<group>"; };
 		846BD749274917600025EABA /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		847D2E7B270F94670083C897 /* DrinkMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrinkMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		847D2E7E270F94670083C897 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -168,7 +166,6 @@
 				8497933D271DED8500539644 /* NetworkManager.swift */,
 				8497933F271DFAC600539644 /* ImageManager.swift */,
 				84979341271DFD0900539644 /* CachManager.swift */,
-				845051DD273D91D20088C4C8 /* BlurEffectManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -259,7 +256,6 @@
 				84F52175271B4F3E001E9266 /* DrinkCell.swift in Sources */,
 				84F52171271B3032001E9266 /* CategoryCell.swift in Sources */,
 				8497933B271DA9E200539644 /* ShortDrink.swift in Sources */,
-				845051DE273D91D20088C4C8 /* BlurEffectManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
